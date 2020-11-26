@@ -32,7 +32,8 @@ containers-readmes
 x64/
 x86/
 bld/
-[Bb]in/
+#[Bb]in/
+[Dd]ata/
 [Oo]bj/
 [Ll]og/
 
