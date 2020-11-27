@@ -9,6 +9,7 @@ const errorHandle = require('./helpers/errorHandle');
 //routes declaration
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const productsRouter = require('./routes/products');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/product', productsRouter);
 
 //error Handling
 app.use(errorHandle.error_404);
