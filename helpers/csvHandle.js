@@ -2,13 +2,13 @@ const fs = require('fs');
 const reader = require('csv-reader');
 const assert = require('assert');
 
-function readCsvNew(filepath, encoding, columnSet, chunkLenght, callback) {
+function readCsvNew(filepath, encoding, separator, columnSet, chunkLenght, callback) {
 
     let dataChunk = [];
     let inputStream = fs.createReadStream(filepath, encoding)
 
     inputStream
-        .pipe(new reader({ trim: true, delimiter: ';', skipHeader: false, parseNumbers:true, parseBooleans: true, trim:true, asObject: true,  }))
+        .pipe(new reader({ trim: true, delimiter: separator, skipHeader: false, parseNumbers:true, allowQuotes: true, parseBooleans: true, trim:true, asObject: true,  }))
         .on('header', validateHeader)
         .on('error', handleError)
         .on('data', handleData)

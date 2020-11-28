@@ -10,7 +10,8 @@ const db = pgp(
     }      
 );
 
-const columnSet = ['id', 'pesid', 'data_inversa', 'dia_semana', 'horario', 'uf', 'br', 'km', 'municipio', 'causa_principal', 'causa_acidente', 'ordem_tipo_acidente', 'tipo_acidente', 'classificacao_acidente', 'fase_dia', 'sentido_via', 'condicao_metereologica', 'tipo_pista', 'tracado_via', 'uso_solo', 'id_veiculo', 'tipo_veiculo', 'marca', 'ano_fabricacao_veiculo', 'tipo_envolvido', 'estado_fisico', 'idade', 'sexo', 'ilesos', 'feridos_leves', 'feridos_graves', 'mortos', 'latitude', 'longitude', 'regional', 'delegacia', 'uop'];
+const columnSet = ['id', 'pesid', 'data_inversa', 'dia_semana', 'horario', 'uf', 'br', 'km', 'municipio', 'causa_acidente', 'tipo_acidente', 'classificacao_acidente', 'fase_dia', 'sentido_via', 'condicao_metereologica', 'tipo_pista', 'tracado_via', 'uso_solo', 'id_veiculo', 'tipo_veiculo', 'marca', 'ano_fabricacao_veiculo', 'tipo_envolvido', 'estado_fisico', 'idade', 'sexo', 'ilesos', 'feridos_leves', 'feridos_graves', 'mortos', 'latitude', 'longitude', 'regional', 'delegacia', 'uop'];
+//const columnSet = ['id', 'pesid', 'data_inversa', 'dia_semana', 'horario', 'uf', 'br', 'km', 'municipio', 'causa_acidente', 'tipo_acidente', 'classificacao_acidente', 'fase_dia', 'sentido_via', 'condicao_metereologica', 'tipo_pista', 'tracado_via', 'uso_solo', 'id_veiculo', 'tipo_veiculo', 'marca', 'ano_fabricacao_veiculo', 'tipo_envolvido', 'estado_fisico', 'idade', 'sexo',   'nacionalidade', 'naturalidade'];
 const columnSetObjectArray = [];
 columnSet.forEach(column => {
     columnSetObjectArray.push({ name: column });
@@ -18,7 +19,7 @@ columnSet.forEach(column => {
 const cs = new pgp.helpers.ColumnSet(columnSetObjectArray, { table: 'prf_data_raw' });
 
 const chunks = 10000;
-csv.readCsvNew('data/full.csv', 'latin1', columnSet, chunks, (data) => {
+csv.readCsvNew('/Users/cleiton/Downloads/Bases_SeguradoraLider/PRF/acidentes2020.csv', 'latin1', ';', columnSet, chunks, (data) => {
 
     const insert = pgp.helpers.insert(data, cs);
 
