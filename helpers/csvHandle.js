@@ -8,7 +8,7 @@ function readCsvNew(filepath, encoding, columnSet, chunkLenght, callback) {
     let inputStream = fs.createReadStream(filepath, encoding)
 
     inputStream
-        .pipe(new reader({ trim: true, delimiter: ';', skipHeader: false, asObject: true }))
+        .pipe(new reader({ trim: true, delimiter: ';', skipHeader: false, parseNumbers:true, parseBooleans: true, trim:true, asObject: true,  }))
         .on('header', validateHeader)
         .on('error', handleError)
         .on('data', handleData)
@@ -27,10 +27,11 @@ function readCsvNew(filepath, encoding, columnSet, chunkLenght, callback) {
     function handleData(data) {
 
         if (dataChunk.length < chunkLenght && data) {
-            for (let d = 0; d < data.length; d++) {
-                if (data[d] == 'NA' || data[d] == '')
-                    data[d] = undefined;
-            }
+            Object.keys(data).forEach(function (key) {
+                if (data[key] === 'NA' || data[key] === '') {
+                    data[key] = undefined;
+                }
+            });
         }
         else {
             //process the chunk of data
