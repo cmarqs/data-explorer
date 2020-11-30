@@ -10,26 +10,42 @@ const db = pgp(
     }      
 );
 
-const columnSet = ['id', 'pesid', 'data_inversa', 'dia_semana', 'horario', 'uf', 'br', 'km', 'municipio', 'causa_acidente', 'tipo_acidente', 'classificacao_acidente', 'fase_dia', 'sentido_via', 'condicao_metereologica', 'tipo_pista', 'tracado_via', 'uso_solo', 'id_veiculo', 'tipo_veiculo', 'marca', 'ano_fabricacao_veiculo', 'tipo_envolvido', 'estado_fisico', 'idade', 'sexo', 'ilesos', 'feridos_leves', 'feridos_graves', 'mortos', 'latitude', 'longitude', 'regional', 'delegacia', 'uop'];
-//const columnSet = ['id', 'pesid', 'data_inversa', 'dia_semana', 'horario', 'uf', 'br', 'km', 'municipio', 'causa_acidente', 'tipo_acidente', 'classificacao_acidente', 'fase_dia', 'sentido_via', 'condicao_metereologica', 'tipo_pista', 'tracado_via', 'uso_solo', 'id_veiculo', 'tipo_veiculo', 'marca', 'ano_fabricacao_veiculo', 'tipo_envolvido', 'estado_fisico', 'idade', 'sexo',   'nacionalidade', 'naturalidade'];
-const columnSetObjectArray = [];
-columnSet.forEach(column => {
-    columnSetObjectArray.push({ name: column });
-});
-const cs = new pgp.helpers.ColumnSet(columnSetObjectArray, { table: 'prf_data_raw' });
+// console.log('Amostra 32');
+// cargaPRF('data/amostra-32.csv', 'latin1', ';');
 
-const chunks = 10000;
-csv.readCsvNew('/Users/cleiton/Downloads/Bases_SeguradoraLider/PRF/acidentes2020.csv', 'latin1', ';', columnSet, chunks, (data) => {
+// console.log('2017');
+// cargaPRF('/Users/cleiton/Downloads/Bases_SeguradoraLider/PRF/acidentes2017.csv', 'latin1', ';');
 
-    const insert = pgp.helpers.insert(data, cs);
 
-    db.none(insert)
-        .then(() => {
-            // success, all records inserted
-            console.log('sucesso');
-        })
-        .catch(error => {
-            // error
-            console.error(error);
-        });
-});
+// console.log('2018');
+// cargaPRF('/Users/cleiton/Downloads/Bases_SeguradoraLider/PRF/acidentes2018.csv', 'latin1', ';');
+
+
+// console.log('2019');
+// cargaPRF('/Users/cleiton/Downloads/Bases_SeguradoraLider/PRF/acidentes2019.csv', 'latin1', ';');
+
+function cargaPRF(arquivo, encode, separador) {
+    const columnSet = ['id', 'pesid', 'data_inversa', 'dia_semana', 'horario', 'uf', 'br', 'km', 'municipio', 'causa_acidente', 'tipo_acidente', 'classificacao_acidente', 'fase_dia', 'sentido_via', 'condicao_metereologica', 'tipo_pista', 'tracado_via', 'uso_solo', 'id_veiculo', 'tipo_veiculo', 'marca', 'ano_fabricacao_veiculo', 'tipo_envolvido', 'estado_fisico', 'idade', 'sexo', 'ilesos', 'feridos_leves', 'feridos_graves', 'mortos', 'latitude', 'longitude', 'regional', 'delegacia', 'uop'];
+    //const columnSet = ['id', 'pesid', 'data_inversa', 'dia_semana', 'horario', 'uf', 'br', 'km', 'municipio', 'causa_acidente', 'tipo_acidente', 'classificacao_acidente', 'fase_dia', 'sentido_via', 'condicao_metereologica', 'tipo_pista', 'tracado_via', 'uso_solo', 'id_veiculo', 'tipo_veiculo', 'marca', 'ano_fabricacao_veiculo', 'tipo_envolvido', 'estado_fisico', 'idade', 'sexo',   'nacionalidade', 'naturalidade'];
+    const columnSetObjectArray = [];
+    columnSet.forEach(column => {
+        columnSetObjectArray.push({ name: column });
+    });
+    const cs = new pgp.helpers.ColumnSet(columnSetObjectArray, { table: 'prf_data_raw' });
+
+    const chunks = 10000;
+    csv.readCsvNew(arquivo, encode, separador, columnSet, chunks, (data) => {
+
+        const insert = pgp.helpers.insert(data, cs);
+
+        db.none(insert)
+            .then(() => {
+                // success, all records inserted
+                console.log('sucesso');
+            })
+            .catch(error => {
+                // error
+                console.error(error);
+            });
+    });
+}

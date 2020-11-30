@@ -12,7 +12,7 @@ function readCsvNew(filepath, encoding, separator, columnSet, chunkLenght, callb
         .on('header', validateHeader)
         .on('error', handleError)
         .on('data', handleData)
-        .on('end', handleData);
+        .on('end', handleFinish);
 
 
     function validateHeader(headerObteined) {
@@ -26,21 +26,27 @@ function readCsvNew(filepath, encoding, separator, columnSet, chunkLenght, callb
 
     function handleData(data) {
 
-        if (dataChunk.length < chunkLenght && data) {
+        if (data) {
             Object.keys(data).forEach(function (key) {
                 if (data[key] === 'NA' || data[key] === '') {
                     data[key] = undefined;
                 }
             });
+            dataChunk.push(data);
         }
-        else {
+
+        if (dataChunk.length >= chunkLenght) {
             //process the chunk of data
             callback(dataChunk);
 
             //reset the chunk
             dataChunk = [];
         }
-        dataChunk.push(data);
+    }
+
+    function handleFinish() {
+        if (dataChunk.length > 0)
+            callback(dataChunk);
     }
 }
 

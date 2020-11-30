@@ -7,11 +7,13 @@ exports.error_404 = function (req, res, next) {
   
   // error handler
 exports.error_500 = function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = process.env.NODE_ENV === 'development' ? err : {};
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = process.env.NODE_ENV === 'development' ? err : {};
   
-    // render the error page
-    res.status(err.status || 500);
-    res.send('error');
+  console.log(err);
+  
+  // render the error page
+  res.status(err.status || 500);
+  res.send('error');
 };

@@ -30,6 +30,12 @@ module.exports = {
         drop: sql('products/drop.sql'),
         find: sql('products/find.sql'),
         add: sql('products/add.sql')
+    },
+    acidentes: {
+        create: sql('prf/acidentes/create_all.sql'),
+        por_ano: sql('prf/acidentes/por_ano.sql'),
+        semana_mes_ano: sql('prf/acidentes/semana_mes_ano.sql'),
+        vitimas_causas_por_ano: sql('prf/acidentes/vitimas_causas_por_ano.sql')
     }
 };
 

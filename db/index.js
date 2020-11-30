@@ -2,7 +2,7 @@ const promise = require('bluebird'); // best promise library today
 const pgPromise = require('pg-promise'); // pg-promise core library
 const dbConfig = require('../db-config.json'); // db connection details
 const {Diagnostics} = require('./diagnostics'); // optional diagnostics
-const {Users, Products} = require('./repos');
+const {Users, Products, Acidentes} = require('./repos');
 
 // pg-promise initialization options:
 const initOptions = {
@@ -19,6 +19,7 @@ const initOptions = {
         // which should be as fast as possible.
         obj.users = new Users(obj, pgp);
         obj.products = new Products(obj, pgp);
+        obj.acidentes = new Acidentes(obj, pgp);
     }
 };
 

@@ -37,3 +37,37 @@ CREATE TABLE prf_data_raw(
     delegacia TEXT,
     uop TEXT
 );
+
+/* 2016 e anterior  */
+CREATE TABLE prf_data_raw_antiga(
+    id TEXT,
+    pesid TEXT,
+    data_inversa TEXT,
+    dia_semana TEXT,
+    horario TEXT,
+    uf TEXT,
+    br TEXT,
+    km TEXT,
+    municipio TEXT,
+    causa_principal TEXT,
+    causa_acidente TEXT,
+    ordem_tipo_acidente TEXT,
+    tipo_acidente TEXT,
+    classificacao_acidente TEXT,
+    fase_dia TEXT,
+    sentido_via TEXT,
+    condicao_metereologica TEXT,
+    tipo_pista TEXT,
+    tracado_via TEXT,
+    uso_solo TEXT,
+    id_veiculo TEXT,
+    tipo_veiculo TEXT,
+    marca TEXT,
+    ano_fabricacao_veiculo TEXT,
+    tipo_envolvido TEXT,
+    estado_fisico TEXT,
+    idade TEXT,
+    sexo TEXT,
+    nacionalidade TEXT,
+    naturalidade TEXT
+);
