@@ -3,7 +3,7 @@ var router = express.Router();
 const { db } = require('../db');
 
 
-GET('/', () => db.acidentes.por_ano());
+GET('/', () => db.acidentes.por_mes_ano());
 
 GET('/semana_mes_ano/:ano', (req, res, next) => db.acidentes.semana_mes_ano(req.params.ano));
 

@@ -8,22 +8,14 @@
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "name": "nodemon",
-            "program": "${workspaceFolder}/bin/www.js",
+            "program": "${workspaceFolder}/bin/www",
             "request": "launch",
-            "restart": true,
+            "restart": true, 
             "runtimeExecutable": "nodemon",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "type": "pwa-node"
         },
-        {
-        "name": "Launch Program",
-        "program": "${workspaceFolder}/bin/www",
-        "request": "launch",
-        "skipFiles": [
-            "<node_internals>/**"
-        ],
-        "type": "pwa-node"
-    }]
+    ]
 }

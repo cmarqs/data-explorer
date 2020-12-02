@@ -11,7 +11,7 @@ class AcidentesRepository{
         return this.db.none(sql.create);
     }
 
-    async por_ano() {
+    async por_mes_ano() {
         return this.db.any(sql.por_ano);
     }
 

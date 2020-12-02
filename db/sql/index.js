@@ -33,7 +33,7 @@ module.exports = {
     },
     acidentes: {
         create: sql('prf/acidentes/create_all.sql'),
-        por_ano: sql('prf/acidentes/por_ano.sql'),
+        por_ano: sql('prf/acidentes/por_mes_ano.sql'),
         semana_mes_ano: sql('prf/acidentes/semana_mes_ano.sql'),
         vitimas_causas_por_ano: sql('prf/acidentes/vitimas_causas_por_ano.sql')
     }
